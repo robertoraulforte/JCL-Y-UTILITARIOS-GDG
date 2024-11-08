@@ -1,0 +1,137 @@
+
+
+
+
+
+
+JCL - Generation Data Group or GDG
+
+
+Generation Data Groups (GDGs) are group of datasets related to each other by a common name.
+
+The common name is referred as GDG base and each dataset associated with the base is called a GDG version.
+
+A Maximum of 255 generations are allowed for a GDG base.
+For example,
+
+MYDATA.TEST.SAMPLE.GDG is the GDG base name.
+
+The datasets are named as MYDATA.TEST.SAMPLE.GDG.G0001V00, MYDATA.TEST.SAMPLE.GDG.G0002V00 and so on.
+G – Stands for Generation number – Value range 0000 – 9999
+V – Stands for Version number – Value range 00 – 99
+
+Use of GDG:
+We do not need to create a new JCL or change the name of the JCL every time in a weekly run or daily run or monthly run or yearly run of a JCL.
+
+You can set the limit of the related files(generations).
+
+We can easily keep track of all generation of data sets.
+
+We can delete or uncatalog the older generation.
+
+Any particular generation can be referred easily.
+Current version of the GDG is referred as MYDATA.TEST.SAMPLE.GDG(0),
+Previous versions are referred as (-1), (-2) and so on.
+Next(new) version to be created in a program is refered as MYDATA.TEST.SAMPLE.GDG(+1).
+How to create a GDG?
+STEP1: Create a GDG base (using IDCAMS utility – Access method service utility)
+
+//DEFGDG1   JOB  ...
+//STEP1    EXEC PGM=IDCAMS
+//SYSPRINT DD   SYSOUT=A
+//SYSIN    DD   *
+     DEFINE GDG -
+           (NAME(userid.MYGDG.TEST) -
+           EMPTY -
+           NOSCRATCH -
+           LIMIT(15))
+/*
+
+List of PARAMETERS used to create GDG:
+
+NAME – Name of the GDG Base.
+
+LIMIT – To limit the maximum number of generations.
+
+EMPTY/NOEMPTY:
+
+NOEMPTY – Uncatalog only the oldest generation in GDG when the limit is reached.
+EMPTY – Uncatalog all the generations when a limit is reached.
+
+SCRATCH/NOSCRATCH:
+
+SCRATCH -Physically delete the dataset(generation) which is uncataloged.
+NOSCRATCH – Don’t Physically delete the dataset(generation) which is uncataloged.
+STEP2: Using IEFBR14 utility, we create the new generations.
+
+//DEFGDS   JOB  ...
+//STEP1    EXEC PGM=IEFBR14
+//GDSDD1   DD   DSN=ICFUCAT1.GDG02(+1),DISP=(NEW,CATLG),
+//         SPACE=(TRK,(5,2)),STORCLAS=GRPVOL1,DATACLAS=ALLOC01
+//SYSPRINT DD   SYSOUT=A
+//SYSIN    DD   *
+/*
+If there is no generation created for this gdg base, this job creates new generation - ICFUCAT1.GDG02.G0001V00. otherwise, it will create a new generation based on existing generation number.
+
+After you have created several generations. if you display your GDG would look like this in ISPF 3.4:
+
+ICFUCAT1.GDG02
+ICFUCAT1.GDG02.G0001V00
+ICFUCAT1.GDG02.G0002V00
+ICFUCAT1.GDG02.G0003V00
+
+Difference between EMPTY and NOEMPTY?
+
+Some of you might be confused between EMPTY and NOEMPTY.
+
+Let us take an example –
+Suppose, you have a GDG Base, IBM.SALES.REPORT and you have created 3 generations like –
+
+
+IBM.SALES.REPORT.G0001V00
+IBM.SALES.REPORT.G0002V00
+IBM.SALES.REPORT.G0003V00
+
+Now, when you try to create another generation and if you have coded ‘NOEMPTY‘ – It means that it will remove the the oldest generation from the catalog when the limit is reached which means that only IBM.SALES.REPORT.G0001V00 will be uncataloged. So, now the 3 generations which are present are -
+IBM.SALES.REPORT.G0002V00
+IBM.SALES.REPORT.G0003V00
+IBM.SALES.REPORT.G0004V00
+
+Now, Suppose, you have a GDG Base, IBM.SALES.STATUS and you have created 3 generations like IBM.SALES.STATUS.G0001V00, IBM.SALES.STATUS.G0002V00, and IBM.SALES.STATUS.G0003V00.
+
+Now, what happens when you try to create another generation and If you have coded ‘EMPTY‘ – It means that it will remove all the older generations from the catalog which means that IBM.SALES.STATUS.G0001V00, IBM.SALES.STATUS.G0002V00, and IBM.SALES.STATUS.G0003V00 will be uncataloged and IBM.SALES.STATUS.G00004V00 will be created.
+How to use GDG in a JCL?
+
+In the following example, the latest version of MYDATA.IBM.SAMPLE.GDG is used as input to the program and a new version of MYDATA.IBM.SAMPLE.GDG is created as the output.
+
+//CNDSAMP JOB CLASS=6,NOTIFY=&SYSUID
+//*
+//STP01   EXEC PGM=MYCOBB
+//IN1     DD DSN=MYDATA.IBM.SAMPLE.GDG(0),DISP=SHR
+//OUT1    DD DSN=MYDATA.IBM.SAMPLE.GDG(+1),DISP=(,CALTG,DELETE)
+//        LRECL=100,RECFM=FB
+
+Here, if the GDG had been referred by the actual name like MYDATA.IBM.SAMPLE.GDG.G0001V00, then it leads to changing the JCL every time before execution. Using (0) and (+1) makes it dynamically substitute the GDG version for execution.
+How to delete a GDG?
+
+If you need to delete your GDG, delete the individual data sets (G0001V00, G0002V00, etc.) and then run this IDCAMS job to delete the GDG.
+
+//STEP010 EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+  DELETE (MYDATA.IBM.SAMPLE.GDG) GDG FORCE
+/*
+How to modify existing GDG parameters?
+
+If you wish to change the parameter of the GDG Base. We use ALTER command,
+For example, if you want to change the number of generations run this IDCAMS alter example where the number of generation is increased to 50.
+
+//STEP010 EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSIN DD *
+  ALTER MYDATA.IBM.SAMPLE.GDG LIMIT(50)
+/*
+
+
+If you have any doubts or queries related to this chapter, get them clarified from our Mainframe experts on ibmmainframer Community!
+
