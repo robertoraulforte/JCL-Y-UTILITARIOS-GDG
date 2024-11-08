@@ -1,0 +1,35 @@
+//EJERCIN  JOB 1,CLASS=A,MSGCLASS=A,NOTIFY=&SYSUID                      00010000
+//STEP1    EXEC PGM=IEBGENER                                            00020000
+//SYSPRINT DD SYSOUT=*                                                  00030000
+//SYSIN    DD DUMMY                                                     00040000
+//SYSUT1   DD *                                                         00050000
+ZATTA      SJ       3000                                                00060000
+LOPEZ      BA       1500                                                00070000
+PEREZ      CA       2200                                                00080000
+GOMEZ      MI       1800                                                00090000
+SANCHEZ    BA       2500                                                00100000
+RAMIREZ    SJ       3200                                                00110000
+TORRES     MI       1400                                                00120000
+FLORES     BA       3300                                                00130000
+ACOSTA     CA       1900                                                00140000
+DOMINGUEZ  MI       2700                                                00150000
+GUTIERREZ  SJ       3100                                                00160000
+NAVARRO    BA       2100                                                00170000
+MORALES    CA       3500                                                00180000
+ROJAS      MI       2300                                                00190000
+CRUZ       SJ       2900                                                00200000
+ORTIZ      BA       4000                                                00210000
+GUTIERREZ  SJ       3100                                                00220000
+NAVARRO    BA       2100                                                00230000
+MORALES    CA       3500                                                00240000
+ROJAS      MI       2300                                                00250000
+CRUZ       SJ       2900                                                00260000
+ORTIZ      BA       4000                                                00270000
+/*                                                                      00280000
+//SYSUT2   DD DSN=STAFE.RRFORTE.OUT7,                                   00290000
+//           DISP=(NEW,CATLG,DELETE),                                   00300000
+//           DCB=(DSORG=PS,RECFM=FB,LRECL=80,BLKSIZE=0),                00310000
+//           SPACE=(TRK,(1,1),RLSE),                                    00320000
+//           UNIT=SYSDA                                                 00330000
+/*                                                                      00340000
+

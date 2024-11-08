@@ -1,0 +1,13 @@
+*************************************************************           00001000
+*  BORRA UNA GENERACION CON IDCAMS                                      00002000
+*************************************************************           00003000
+//STEP00  EXEC PGM=IDCAMS                                               00010000
+//SYSPRINT  DD SYSOUT=*                                                 00020000
+//SYSOUT    DD SYSOUT=*                                                 00030000
+//SYSIN     DD *                                                        00040000
+ DELETE STAFE.EZZATTA.OUT2 PURGE                                        00050000
+ DELETE STAFE.EZZATTA.GDG2.* PURGE                                      00060000
+ DELETE STAFE.EZZATTA.GDG2 GDG FORCE                                    00070000
+ SET MAXCC=00                                                           00080000
+/*                                                                      00090000
+
