@@ -1,0 +1,43 @@
+//*ALTGDG     ALTERA EL LIMITE DEL BASE DEL GDG                         00010002
+//*BASEGDG    ALTERA EL LIMITE DEL BASE DEL GDG                         00011002
+//*DELGDGBS   ALTERA EL LIMITE DEL BASE DEL GDG                         00012002
+//*DELGDGGE   BORRA LAS GENERACIONES DE GDG                             00013002
+//*GDGGEN     BORRA LAS GENERACIONES DE GDG                             00014002
+//*GDGV       BORRA LAS GENERACIONES DE GDG                             00014102
+//*IN         VER                                                       00014202
+//*PRACTIK1   EJERCICIO 1 PRACTICA GDG (EMIR)                           00014302
+//*PRACTIK2   EJERCICIO 2 PRACTICA GDG (EMIR)                           00014402
+//*PRACTIK3   EJERCICIO 3 PRACTICA GDG (EMIR)                           00014502
+//*PURGE      BORRA UNA GENERACION CON IDCAMS                           00014602
+//*RSPRKTK1   RESPUESTA EJERCICIO 1                                     00014702
+//*RSPRKTK2   RESPUESTA EJERCICIO 2                                     00014802
+//*RSPRKTK3   RESPUESTA EJERCICIO 3                                     00014902
+//*SORT1      THIS JCL SORT AN INPUT FILE                               00015002
+//*SORT2      JCL SORT AN INPUT FILE AND DELETE THE DUPLICATE RECORDS   00015102
+//*SORT3      JCL SORT AN INPUT FILE AND DELETE DUPLICATE RECORDS       00015202
+//*SORT4      JCL SORT AND COPY THE RECORDS THAT FULLFILL THE CONDITION 00015302
+//*SORT5      JCL SORT AND COPY A PS WITH SPECIFIC CONDITIONS ---       00015402
+//*SORT5      IN MULTIPLE PS                                            00015502
+//***NAME***  ***DETALLE***                                             00015602
+//***NAME***  ***DETALLE***                                             00015702
+//*                                                                     00016002
+                                                                        00020000
+                                                                        00030000
+                                                                        00040000
+                                                                        00050000
+                                                                        00060000
+                                                                        00070000
+                                                                        00080000
+                                                                        00090000
+                                                                        00100000
+                                                                        00110000
+                                                                        00120000
+                                                                        00130000
+                                                                        00140000
+                                                                        00150000
+                                                                        00160000
+                                                                        00170000
+                                                                        00180000
+                                                                        00190000
+                                                                        00200000
+

@@ -1,0 +1,13 @@
+//GDGV    JOB 1,'DEL GDG GEN',CLASS=A,MSGCLASS=A,MSGLEVEL=(1,1),        00010000
+//          NOTIFY=&SYSUID                                              00020000
+//**********************************************************************00030000
+//*             ESTE JCL BORRA LAS GENERACIONES DE GDG                 *00040000
+//**********************************************************************00050000
+//STEP01  EXEC PGM=IEFBR14                                              00060000
+//SYSPRINT  DD SYSOUT=*                                                 00070000
+//SYSOUT    DD SYSOUT=*                                                 00080000
+//SYSDUMP   DD SYSOUT=*                                                 00090000
+//DD1       DD DSN=STAFE.EZZATTA.BASE.GDG(0),                           00100000
+//            DISP=(OLD,DELETE,DELETE)                                  00110000
+/*                                                                      00120000
+

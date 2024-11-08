@@ -1,0 +1,35 @@
+//**********************************************************************00010000
+//*                      INDEX OF JCL'S SORT                           *00020000
+//**********************************************************************00030000
+//*                                                                    *00040000
+//**********************************************************************00050000
+//*                        JOBs                                        *00060000
+//* -SORT1 (MEMBER): ESTE JOB PERMITE ORDENAR UN ARCHIVO DE ENTRADA,   *00070000
+//*                 GENERANDO UNO NUEVO CON LOS MISMOS ATRIBUTOS. ESTE *00080000
+//*                 JCL TIENE 4 PARAMETROS QUE SON EL POSICIONAMIENTO  *00090000
+//*                 INICIAL; LA EXTENSION DEL ORDENAMIENTO; EL TIPO DE *00100000
+//*                 DE CARACTER A EVALUAR (EN ESTE CASO UN CHARACTER) Y*00110000
+//*                 SI ES ASCENDENTE O DESCENDENTE.                    *00120000
+//*                                                                    *00130000
+//* -SORT2 (MEMBER): ESTE JOB HACE LO MISMO QUE SORT1 PERO LE AGREGO   *00140000
+//*                  OTRA INSTRUCCION EN SYSIN PARA QUE ELIMINE LOS    *00150000
+//*                  DUPLICADOS.                                       *00160000
+//*                                                                    *00170000
+//* -SORT3 (MEMBER): ESTE JCL ELIMINA LOS DUPLICADOS QUE ESTAN EN EL   *00180000
+//*                  PS A ORDENAR, COLOCANDOLOS EN OTRO PS. MIENTRAS   *00190000
+//*                  QUE LOS REGISTROS QUE SON UNICOS LOS MANDA EN OTRO*00200000
+//*                  DATASET. ADEMAS, UTILIZA EL PROGRAMA/UTILITARIO   *00210000
+//*                  ICETOOL EN VEZ DE SORT, DEBIDO A QUE ESTA FUNCION *00220000
+//*                  YA NO ES SOPORTADA POR SORT. EN VEZ DE SYSIN SE   *00230000
+//*                  UTILIZA TOOLIN Y LA INSTRUCCION QUE COLOCO ES:    *00240000
+//*                  SELECCIONA EL ARCHIVO DE ENTRADA AL DE SALIDA,    *00250000
+//*                  BAJO LAS COLUMNAS DE ORDEN SELECCIONADAS Y LOS    *00260000
+//*                  DUPLICADOS IRIAN AL SORTXSUM (OTRO DATASET).      *00270000
+//*                                                                    *00280000
+//* -SORT4 (MEMBER): ESTE JCL SOLO COPIA Y ORDENA LOS DATOS QUE        *00290000
+//*                  CUMPLAN CON LA CONDICION QUE SE HALLA DEFINIDO.   *00300000
+//*                                                                    *00310000
+//* -SORT5 (MEMBER): ESTE JCL HACE LO MISMO QUE EL SORT4 PERO CON      *00320000
+//*                  MULTIPLES OUTPUTS EN DISTINTOS DATASETS PERO QUE  *00330000
+//*                  TENGA LOS MISMOS ATRIBUTOS.                       *00340000
+
